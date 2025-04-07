@@ -1,7 +1,11 @@
+using System.Runtime.Serialization;
+
 namespace CIS229Assignment03.Models;
 
+[Serializable]
 public class Identity
 {
+    [DataMember]
     public int UserId { get; set; }
     public bool Active { get; set; }
     public string Term { get; set; }
@@ -18,8 +22,10 @@ public class Identity
     }
 }
 
+[Serializable]
 public class Group
 {
+    [DataMember]
     public int Id { get; set; }
     public string Name { get; set; }
 
@@ -30,8 +36,10 @@ public class Group
     }
 }
 
+[Serializable]
 public class Role
 {
+    [DataMember]
     public int Id { get; set; }
     public string Name { get; set; }
 

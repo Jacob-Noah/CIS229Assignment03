@@ -23,6 +23,8 @@ public class IdentityController : Controller
     private Identity identity3 = new Identity(654321, true, "Winter 2025", [raiderGaming], studentEmployee);
     private Identity identity4 = new Identity(1, false, "~", [], admin);
     
+    private static List<Identity> identities = new List<Identity>();
+    
     // GET
     public IActionResult Index()
     {
@@ -32,12 +34,27 @@ public class IdentityController : Controller
     // GET /GetIdentities
     public JsonResult GetIdentities()
     {
-        List<Identity> identities = new List<Identity>();
+        return Json(identities);
+    }
+    
+    // GET /PopulateIdentities
+    public JsonResult PopulateIdentities()
+    {
         identities.Add(identity1);
         identities.Add(identity2);
         identities.Add(identity3);
         identities.Add(identity4);
 
         return Json(identities);
+    }
+    
+    // POST /AddIdentity
+    public JsonResult AddIdentity([FromBody] Identity identity)
+    {
+        if (identity == null) return Json(new { message = "Invalid identity" });
+        
+        identities.Add(identity);
+
+        return Json(identity);
     }
 }
